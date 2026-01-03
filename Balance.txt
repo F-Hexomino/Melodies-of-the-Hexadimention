@@ -1,0 +1,45 @@
+/*
+
+=== Melodies of the Hexadimention ===
+
+> > > > > > Balance
+
+"We are 6 for 6, one for each"
+
+*/
+
+samples('bubo:waveforms');
+
+const volumeStart1 = slider(0.06,0,.2,0.01)
+const volumeEnd1 = slider(0.07,0,.2,0.01)
+
+const volume2 = slider(0.1,0,.3,0.01)
+
+// Melody of the Hexomino (4 + 2 notes)
+$: note("[5 8 5 8 - 10 12 -]".fast(1.5)).anchor("[56 60 60 57 57 60 65 70 <[65 60] [72 72 60]>]/8".slow(1.377))
+  .scale("F1:major")
+  .room(".6!4 .1".slow(4)).roomsize(17).pan(sine.range(.2, .8).slow(4))
+  .gain(perlin.range(volumeStart1,volumeEnd1).slow(12))
+  .lpf(1430)
+  .degradeBy(0.02) // Randomly remove 2% of all notes
+  .s("wt_flute")
+
+
+$: note("[5 8 5 8 - 10 12 -]".fast(1.5)).anchor("[56 60 60 57 57 60 65 70 <[65 60] [72 72 60]>]/8".slow(1.377))
+  .scale("F1:major")
+  .room(.6).roomsize(17)
+  .gain(".02 .02 0 0 0".slow(12))
+  .lpf(1700)
+  .degradeBy(0.02)
+  .sound('wt_bw_squrounded')
+
+
+$: note("[ -!3 [1 2 3 -!8]!2 [4 3 2 1 -!6] ]/42").anchor("60").adsr("1:.1:.1:1")
+  .sound("gm_recorder").scale("C1:major").room(1).pan(sine.range(.2, .8))
+  .gain(volume2)
+
+
+$: note("[ -!5 [-!6 1] ]/42").anchor("10")
+  .sound("ace_ht").scale("C1:major").room(1).gain(.16)
+  .gain(volume2)
+
